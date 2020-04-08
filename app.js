@@ -1,18 +1,41 @@
-var budgetController = (function () {
+/** Budget Controller
+ *
+ */
+const budgetController = (function () {
   //do something
-  const x = 20;
-
-  const add = function (a) {
-    return x + a;
-  };
-
-  return {
-    publicTest: function (b) {
-      console.log(add(b));
-    },
-  };
 })();
 
-budgetController.publicTest(5);
+/** UI Controller
+ *
+ */
+const userInterfaceController = (function () {
+  //do something
+})();
 
-//
+/** Global App Controller
+ *
+ */
+const appController = (function (budgetCtrl, UICrtl) {
+  //grab the button
+  const addBtn = document.querySelector(".add__btn");
+
+  //add the event listener
+  addBtn.addEventListener("click", () => {
+    /** As soon someone hit the button we have to do the follow steps.
+     *
+     * Get the filed input data
+     * Add the item to the budget controller
+     * Add the new item to the User Interface
+     * Calculate the budget
+     * Display the budget on the User Interface
+     *
+     */
+  });
+
+  document.addEventListener("keypress", (event) => {
+    //check if the user pressed the return key (enter)
+    if (event.keyCode === 13) {
+      //do something when enter is pressed
+    }
+  });
+})(budgetController, userInterfaceController);
