@@ -31,16 +31,28 @@ const userInterfaceController = (function () {
   };
 })();
 
-/** Global App Controller
- *
- */
+//Global App Controller
 const appController = (function (budgetCtrl, UICrtl) {
-  const DOM = UICrtl.getDOMstrings();
+  const setupEventListeners = () => {
+    //get DOM Strings
+    const DOM = UICrtl.getDOMstrings();
+
+    //grab the button
+    document
+      .querySelector(DOM.inputBtn)
+      .addEventListener("click", controllerAddItem);
+
+    document.addEventListener("keypress", (event) => {
+      //check if the user pressed the return key (enter)
+      if (event.keyCode === 13) {
+        controllerAddItem();
+      }
+    });
+  };
 
   const controllerAddItem = () => {
     //1. Get the filed input data
     const input = UICrtl.getInput();
-    console.log(input);
 
     //2. Add the item to the budget controller
     //Add the new item to the User Interface
@@ -48,15 +60,12 @@ const appController = (function (budgetCtrl, UICrtl) {
     //Display the budget on the User Interface
   };
 
-  //grab the button
-  document
-    .querySelector(DOM.inputBtn)
-    .addEventListener("click", controllerAddItem);
-
-  document.addEventListener("keypress", (event) => {
-    //check if the user pressed the return key (enter)
-    if (event.keyCode === 13) {
-      controllerAddItem();
-    }
-  });
+  return {
+    init() {
+      console.log("Application has started");
+      setupEventListeners();
+    },
+  };
 })(budgetController, userInterfaceController);
+
+appController.init();
